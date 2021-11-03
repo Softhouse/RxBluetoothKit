@@ -27,11 +27,22 @@ public class Descriptor {
         self.descriptor = descriptor
         self.characteristic = characteristic
     }
+    
+    convenience init(descriptor: CBDescriptor, peripheral: Peripheral) throws {
+        guard
+            let characteristic = descriptor.characteristic,
+            let service = characteristic.service
+        else {
+            throw BluetoothError.serviceDestroyed
+        }
 
-    convenience init(descriptor: CBDescriptor, peripheral: Peripheral) {
-        let service = Service(peripheral: peripheral, service: descriptor.characteristic.service)
-        let characteristic = Characteristic(characteristic: descriptor.characteristic, service: service)
-        self.init(descriptor: descriptor, characteristic: characteristic)
+        self.init(
+            descriptor: descriptor,
+            characteristic: Characteristic(
+                characteristic: characteristic,
+                service: Service(peripheral: peripheral, service: service)
+            )
+        )
     }
 
     /// Function that allow to observe writes that happened for descriptor.

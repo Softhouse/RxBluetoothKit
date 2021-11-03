@@ -39,10 +39,16 @@ public class Characteristic {
         self.characteristic = characteristic
         self.service = service
     }
+    
+    convenience init(characteristic: CBCharacteristic, peripheral: Peripheral) throws {
+        guard let service = characteristic.service else {
+            throw BluetoothError.serviceDestroyed
+        }
 
-    convenience init(characteristic: CBCharacteristic, peripheral: Peripheral) {
-        let service = Service(peripheral: peripheral, service: characteristic.service)
-        self.init(characteristic: characteristic, service: service)
+        self.init(
+            characteristic: characteristic,
+            service: Service(peripheral: peripheral, service: service)
+        )
     }
 
     /// Function that triggers descriptors discovery for characteristic.

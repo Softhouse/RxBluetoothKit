@@ -44,6 +44,8 @@ public enum BluetoothError: Error {
     case publishingL2CAPChannelFailed(CBL2CAPPSM, Error?)
     // Unknown
     case unknownWriteType
+    case peripheralDestroyed
+    case serviceDestroyed
 }
 
 extension BluetoothError: CustomStringConvertible {
@@ -123,6 +125,10 @@ extension BluetoothError: CustomStringConvertible {
         // Unknown
         case .unknownWriteType:
             return "Unknown write type"
+        case .peripheralDestroyed:
+            return "Peripheral was already deallocated"
+        case .serviceDestroyed:
+            return "Service was already deallocated"
         }
     }
 }
