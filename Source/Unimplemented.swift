@@ -1,4 +1,3 @@
-import Foundation
 import RxSwift
 
 func unimplementedFunction(file: String = #file, function: String = #function, line: Int = #line) {

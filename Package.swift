@@ -6,13 +6,13 @@ import PackageDescription
 let package = Package(
     name: "RxBluetoothKit",
     platforms: [
-        .macOS(.v10_13), .iOS(.v9), .tvOS(.v11), .watchOS(.v4)
+        .macOS(.v10_13), .iOS(.v12), .tvOS(.v11), .watchOS(.v4)
     ],
     products: [
         .library(name: "RxBluetoothKit", targets: ["RxBluetoothKit"])
     ],
     dependencies: [
-        .package(url: "https://github.com/ReactiveX/RxSwift.git", .upToNextMajor(from: "5.1.1"))
+        .package(url: "https://github.com/ReactiveX/RxSwift.git", .upToNextMajor(from: "6.0.0"))
     ],
     targets: [
         .target(
